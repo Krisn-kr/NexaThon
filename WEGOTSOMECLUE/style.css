@@ -107,3 +107,57 @@ h1, h5 {
   gap: 12px; 
   margin-bottom: 10px;
 }
+
+.ring {
+  width: 44px; 
+  
+  height: 44px; 
+  border-radius: 50%;
+  border: 2px solid; 
+  display: flex; 
+  align-items: center;
+  justify-content: center; 
+  font-weight: 700;
+  font-family: 'Syne', sans-serif; 
+  font-size: 11px; 
+  flex-shrink: 0;
+}
+
+.rg { 
+    border-color: #C9A84C; 
+    color: #C9A84C; 
+}
+.rp { 
+    border-color: #8B9CF4; 
+    color: #8B9CF4; 
+}
+.rd { 
+    border-color: #444; 
+    color: #444; 
+}
+.rpay { 
+    color: #C9A84C; 
+    font-weight: 700; 
+    font-size: 14px; 
+}
+.wa { 
+    color: #25D366; 
+    font-size: 12px; 
+    text-decoration: none; 
+    border: 1px solid rgba(37,211,102,0.3); 
+    padding: 4px 12px; 
+    border-radius: 20px; }
+
+.gm-input {
+  
+    width: 100%; 
+  background: #111; 
+  border: 1px solid #222;
+  color: #ddd; 
+  border-radius: 8px; 
+  padding: 9px 12px;
+  
+  font-size: 14px; 
+  outline: none; 
+  font-family: 'DM Sans', sans-serif;
+}
