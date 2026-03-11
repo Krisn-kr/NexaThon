@@ -50,3 +50,17 @@ body{
      border-color: #C9A84C; background: rgba(201,168,76,0.1);
       color: #E8C96B;
      }
+
+
+.opt{
+    padding: 12px;
+    border: 1px ;
+    border-radius: 10pc;
+    background: black;
+    
+}     
+
+.opt.on{
+    border-color: rgb(223, 187, 121);
+    color: orange;
+}

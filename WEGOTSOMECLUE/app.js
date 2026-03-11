@@ -22,3 +22,12 @@ document.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
   refreshQuiz();
   show("quiz");
 }
+
+// Home - load gig previews
+function loadHome() {
+  document.getElementById("home-gigs").innerHTML = allGigs().slice(0, 3).map(g =>
+    `<div class="gig-card">
+      <div><div style="font-weight:600";
+    </div>`
+  ).join("");
+}
