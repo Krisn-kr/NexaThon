@@ -11,6 +11,34 @@ const GIGS = [
   { id:10, title:"Python Script – Shop Inventory",    desc:"Track stock and alert on low items",                pay:"Rs 800",         skills:["code","data"],    cat:"tech",      by:"Sharma Kirana"   },
 ];
 
+let step = 1, skills = [], time = "", interests = [];
+// =========================
+//           allGIgs
+// =========================
+function allGigs() {
+    let hidden = JSON.parse(localStorage.getItem("gm_hidden") || "[]");
+    let extra = JSON.parse(localStorage.getItem("gm_gigs") || "[]");
+    return GIGS.concat(extra).filter(g => !hidden.includes(g.id));
+}
+
+// ======== remove gigs===========
+function removeGig(id) {
+    let hidden = JSON.parse(localStorage.getItem("gm_hidden") || "[]");
+    hidden.push(id);
+    localStorage.setItem("gm_hidden", JSON.stringify(hidden));
+    loadHome();
+}
+
+// == show -=
+
+function show(id) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0, 0);
+  gsap.from("#" + id, { opacity: 0, y: 12, duration: 0.3 });
+}
+
+
 // Quiz
 function startQuiz() {
   step = 1;
@@ -24,10 +52,11 @@ document.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
 }
 
 // Home - load gig previews
-function loadHome() {
-  document.getElementById("home-gigs").innerHTML = allGigs().slice(0, 3).map(g =>
-    `<div class="gig-card">
-      <div><div style="font-weight:600";
-    </div>`
-  ).join("");
+function startQuiz() {
+    step = 1; skills.length = 0; time = ""; interests.length = 0;
+    document.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
+    document.querySelectorAll(".opt").forEach(c => c.classList.remove("on"));
+    ["q1", "q2", "q3"].forEach((id, i) => document.getElementById(id).style.display = i === 0 ? "" : "none");
+    refreshQuiz();
+    show("quiz");
 }
