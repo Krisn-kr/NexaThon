@@ -1,66 +1,109 @@
-body{
-    background-color: rgb(46, 44, 77);
-    color: white;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
+body { 
+    background: #0a0a12; 
+    color: #ddd; 
+    font-family: 'DM Sans', sans-serif; 
 }
-.logo{
-    font-weight: 800;
-    font-size: 22px;
-    cursor: pointer;
-
-
+nav { 
+    background: #0a0a12; 
 }
-
-.logo span{
-    color: rgb(166, 106, 15);
+.logo { 
+    font-family: 'Syne', sans-serif; 
+    font-weight: 800; 
+    font-size: 20px; 
+    cursor: pointer; 
 
 
 }
+.logo span, .gold { color: #C9A84C; }
+h1, h5 { 
+    font-family: 'Syne', sans-serif; 
+    
+    font-weight: 800; }
 
-.page{
-    display: none;
-    max-width: 600;
-    margin: auto;
+.page { 
+    display: none; 
+    max-width: 600px; 
+    margin: auto; }
+.page.active { 
+    display: block; }
 
+.btn-gold {
+  background: 
+  linear-gradient(135deg, #C9A84C, #E8C96B);
+  color: #0a0a12; border: none; 
+  border-radius: 50px;
+  font-family: 'Syne', sans-serif; 
+  font-weight: 700;
+  cursor: pointer; 
+  font-size: 15px;
 }
-
-.page.active{
-    display: block;
-
-
-}
-
-.btm-gold{
-    background-color: linear-gradient(135ged,rgb(222, 134, 33),rgb(230, 191, 119));
-    color: black;
-    border: none;
-    border-radius: 50px;
-    font-weight: 700;
+.btn-gold:disabled { 
+    opacity: 0.4; 
+    cursor: default; 
 
 }
 
 .chip {
-  padding: 6px 14px; border-radius: 50px;
-  border: 1px solid #222; background: #111;
-  color: #777; font-size: 13px; cursor: pointer; user-select: none;
+  padding: 6px 14px; 
+  
+  border-radius: 50px;
+  border: 1px solid #222; 
+  
+  background: #111;
+  color: #777; 
+  font-size: 13px; 
+  
+  cursor: pointer; 
+  user-select: none;
 }
+.chip.on { 
+    border-color: #C9A84C; 
+    background: rgba(201,168,76,0.1); 
+    color: #E8C96B; }
 
-.chip.on {
-     border-color: #C9A84C; background: rgba(201,168,76,0.1);
-      color: #E8C96B;
-     }
+.opt {
+  padding: 12px 16px; 
+  
+  border-radius: 10px;
+  border: 1px solid #1e1e1e; 
+  background: #111;
+  cursor: pointer; 
+  
+  font-size: 14px;
+}
+.opt.on { 
+    border-color: #C9A84C; 
+    color: #E8C96B; }
 
-
-.opt{
-    padding: 12px;
-    border: 1px ;
-    border-radius: 10pc;
-    background: black;
+.gig-card {
+  background: #111;
+  
+  border: 1px solid #1e1e1e;
+  border-radius: 10px; 
+  padding: 12px 14px;
+  display: flex; 
+  justify-content: space-between;
+  align-items: center; 
+  margin-bottom: 8px;
+}
+.gig-pay { 
+    color: #C9A84C; 
     
-}     
+    font-weight: 700; 
+    font-size: 13px; 
 
-.opt.on{
-    border-color: rgb(223, 187, 121);
-    color: orange;
+}
+.gig-by { 
+    font-size: 12px;
+    color: #555; }
+
+.result-card {
+  background: #111; 
+  border: 1px solid #1e1e1e;
+  border-radius: 10px; 
+  
+  padding: 14px;
+  display: flex; 
+  gap: 12px; 
+  margin-bottom: 10px;
 }

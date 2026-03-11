@@ -87,6 +87,59 @@
     <button class="btn-gold px-3 py-1" onclick="show('post')">Post a Gig</button>
   </div>
 </div>
+
+<!-- POST GIG -->
+<div id="post" class="page container py-4">
+  <h5>Post a Gig ✦</h5>
+  <p class="text-muted small mb-3">Reach students across Ranchi.</p>
+  <div id="pform">
+    <div class="mb-2">
+        <input id="pt" class="gm-input" type="text" placeholder="Gig Title *">
+    </div>
+    <div class="mb-2">
+        <textarea id="pd" class="gm-input" rows="3" placeholder="Description *">
+
+        </textarea>
+    </div>
+    <div class="row g-2 mb-2">
+      <div class="col"><input id="pp" class="gm-input" type="text" placeholder="Pay *">
+    </div>
+      <div class="col">
+        <select id="pc" class="gm-input">
+          <option value="">Category *</option>
+          <option value="tech">Tech</option>
+          <option value="education">Education</option>
+          <option value="social">Social</option>
+          <option value="admin">Admin</option>
+          <option value="design">Design</option>
+        </select>
+      </div>
+    </div>
+    <div class="mb-2">
+      <small class="text-muted">Skills needed:</small>
+      <div class="d-flex flex-wrap gap-1 mt-1" id="pchips">
+        <span class="chip" data-v="code">Code</span>
+        <span class="chip" data-v="write">Write</span>
+        <span class="chip" data-v="design">Design</span>
+        <span class="chip" data-v="teach">Teach</span>
+        <span class="chip" data-v="social">Social</span>
+        
+        <span class="chip" data-v="video">Video</span>
+        <span class="chip" data-v="data">Data</span>
+        <span class="chip" data-v="math">Math</span>
+      </div>
+    </div>
+    <div class="mb-3"><input id="pn" class="gm-input" type="text" placeholder="Your Name / Shop *"></div>
+    <button class="btn-gold w-100" onclick="submitGig()">Publish Gig ✦</button>
+    <div id="perr" class="text-danger small text-center mt-2" style="display:none"></div>
+  </div>
+  <div id="pok" style="display:none" class="text-center py-4">
+    <div class="gold" style="font-size:36px">✦</div>
+    <h6 class="gold mt-2">Gig Posted!</h6>
+    <p class="text-muted small">Going back to home...</p>
+  </div>
+  <button class="btn btn-sm btn-outline-secondary rounded-pill mt-3" onclick="show('home')">← Back</button>
+</div>
 <script src="app.js"> </script>
  
     

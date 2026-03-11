@@ -60,3 +60,34 @@ function startQuiz() {
     refreshQuiz();
     show("quiz");
 }
+
+
+// Post gig
+function submitGig() {
+  let t = document.getElementById("pt").value.trim();
+  let d = document.getElementById("pd").value.trim();
+  let p = document.getElementById("pp").value.trim();
+  let c = document.getElementById("pc").value;
+  let n = document.getElementById("pn").value.trim();
+  if (!t || !d || !p || !c || !n) {
+    document.getElementById("perr").textContent = "Fill all required fields.";
+    document.getElementById("perr").style.display = "";
+    return;
+  }
+  let sk = [...document.querySelectorAll("#pchips .chip.on")].map(x => x.dataset.v);
+  let extra = JSON.parse(localStorage.getItem("gm_gigs") || "[]");
+  extra.push({ id: Date.now(), title:t, desc:d, pay:p, skills:sk, cat:c, by:n });
+  localStorage.setItem("gm_gigs", JSON.stringify(extra));
+  loadHome();
+  document.getElementById("pform").style.display = "none";
+  document.getElementById("pok").style.display = "";
+  setTimeout(() => {
+    document.getElementById("pok").style.display = "none";
+    document.getElementById("pform").style.display = "";
+    document.getElementById("perr").style.display = "none";
+    ["pt","pd","pp","pn"].forEach(id => document.getElementById(id).value = "");
+    document.getElementById("pc").value = "";
+    document.querySelectorAll("#pchips .chip").forEach(c => c.classList.remove("on"));
+    show("home");
+  }, 2000);
+}
