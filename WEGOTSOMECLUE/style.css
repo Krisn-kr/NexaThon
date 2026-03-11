@@ -1,0 +1,41 @@
+body{
+    background-color: rgb(46, 44, 77);
+    color: white;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+.logo{
+    font-weight: 800;
+    font-size: 22px;
+    cursor: pointer;
+
+
+}
+
+.logo span{
+    color: rgb(166, 106, 15);
+
+
+}
+
+.page{
+    display: none;
+    max-width: 600;
+    margin: auto;
+
+}
+
+.page.active{
+    display: block;
+
+
+}
+
+.btm-gold{
+    background-color: linear-gradient(135ged,rgb(222, 134, 33),rgb(230, 191, 119));
+    color: black;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    
+}
