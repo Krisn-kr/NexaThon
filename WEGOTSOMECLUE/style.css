@@ -37,5 +37,16 @@ body{
     border: none;
     border-radius: 50px;
     font-weight: 700;
-    
+
 }
+
+.chip {
+  padding: 6px 14px; border-radius: 50px;
+  border: 1px solid #222; background: #111;
+  color: #777; font-size: 13px; cursor: pointer; user-select: none;
+}
+
+.chip.on {
+     border-color: #C9A84C; background: rgba(201,168,76,0.1);
+      color: #E8C96B;
+     }

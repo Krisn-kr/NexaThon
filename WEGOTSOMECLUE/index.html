@@ -23,7 +23,51 @@
     <div id="home-gigs"></div>
  </div>
 
- 
+ <!-- Quiz section -->
+  <div id="quiz" class="page">
+    <h5 id="qlabel"></h5>
+    <div class="progess nb-3">
+        <div id="qbar" class="progess-bar"></div>
+    </div>
+    <div id="q1">
+        <h5 >Your Skills</h5>
+        <div id="skill-chips" class="d-flex flex-wrap gap-2">
+            <div class="chip " data-v="write">Writing</div>
+            <div class="chip " data-v="code">coding</div>
+            <div class="chip " data-v="design">Desigining</div>
+            <div class="chip " data-v="teach">Teaching</div>
+            <div class="chip " data-v="video">Video</div>
+            <div class="chip " data-v="data">Deta</div>
+        </div>
+
+
+        <div id="q2" style="display:none">
+    <h5>How much time per week?</h5>
+    <div class="d-flex flex-column gap-2 mt-3">
+      <div class="opt" data-v="2-5" onclick="pickTime(this)">2–5 hrs — Light gigs</div>
+      <div class="opt" data-v="5-10" onclick="pickTime(this)">5–10 hrs — Part-time</div>
+      <div class="opt" data-v="10+" onclick="pickTime(this)">10+ hrs — Full side hustle</div>
+    </div>
+  </div>
+
+  <div id="q3" style="display:none">
+    <h5>What interests you?</h5>
+    <div class="d-flex flex-wrap gap-2 mt-3" id="int-chips">
+      <span class="chip" data-v="tech">Tech</span>
+      <span class="chip" data-v="education">Education</span>
+      <span class="chip" data-v="social">Social</span>
+      <span class="chip" data-v="admin">Admin</span>
+      <span class="chip" data-v="design">Design</span>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between mt-4">
+    <button class="btn btn-sm btn-outline-secondary rounded-pill" id="qback" onclick="back()" style="visibility:hidden">← Back</button>
+    <button class="btn-gold px-3 py-1" id="qnext" disabled onclick="next()">Continue →</button>
+  </div>
+</div>
+    </div>
+  </div>
  
     
 </body>
