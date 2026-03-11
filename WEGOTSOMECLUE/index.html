@@ -1,47 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="li">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GigMatch</title>
-    <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GigMatch - Ranchi Student Gigs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="p-3 text_centre">
-    <div class="logo">Gig<span>Match</span></div>
+
+<nav class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom border-dark">
+  <div class="logo" onclick="show('home')"><span>G</span>igMatch</div>
+  <button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="show('post')">Post a Gig</button>
 </nav>
 
-<div class=" container"></div>
-<!-- home -->
- <div id="home" class="page active">
-    <h1 class="mb-3">Find Small Gigs</h1>
-    <button class="btn-gold px-4 py-2 mb-4" onclick="startQuiz()">Find Matches</button>
-    <h5>Availabe
-        Gigs
-    </h5>
-    <div id="home-gigs"></div>
- </div>
+<!-- HOME -->
+<div id="home" class="page active container py-5">
+  <h1 class="text-center mb-2">Find Gigs in <span class="gold">Ranchi</span> 📍</h1>
+  <p class="text-center text-muted mb-4">Students — match with local gig jobs in 60 seconds.</p>
+  <div class="text-center mb-5">
+    <button class="btn-gold px-4 py-2" onclick="startQuiz()">Find My Gigs →</button>
+  </div>
+  <p class="text-muted small mb-2">🟢 Live Gigs</p>
+  <div id="home-gigs"></div>
+</div>
 
- <!-- Quiz section -->
-  <div id="quiz" class="page">
-    <h5 id="qlabel"></h5>
-    <div class="progess nb-3">
-        <div id="qbar" class="progess-bar"></div>
+<!-- QUIZ -->
+<div id="quiz" class="page container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-1">
+    <small class="text-muted" id="qlabel">Step 1 of 3</small>
+    <small class="text-muted" id="qcount"></small>
+  </div>
+  <div class="progress mb-4" style="height:3px">
+    <div class="progress-bar bg-warning" id="qbar" style="width:33%"></div>
+  </div>
+
+  <div id="q1">
+    <h5>What can you do?</h5>
+    <div class="d-flex flex-wrap gap-2 mt-3" id="skill-chips">
+      <span class="chip" data-v="code">Code</span>
+      <span class="chip" data-v="write">Write</span>
+      <span class="chip" data-v="design">Design</span>
+      <span class="chip" data-v="teach">Teach</span>
+      <span class="chip" data-v="social">Social</span>
+      <span class="chip" data-v="video">Video</span>
+      <span class="chip" data-v="data">Data</span>
+      <span class="chip" data-v="math">Math</span>
     </div>
-    <div id="q1">
-        <h5 >Your Skills</h5>
-        <div id="skill-chips" class="d-flex flex-wrap gap-2">
-            <div class="chip " data-v="write">Writing</div>
-            <div class="chip " data-v="code">coding</div>
-            <div class="chip " data-v="design">Desigining</div>
-            <div class="chip " data-v="teach">Teaching</div>
-            <div class="chip " data-v="video">Video</div>
-            <div class="chip " data-v="data">Deta</div>
-        </div>
+  </div>
 
-
-        <div id="q2" style="display:none">
+  <div id="q2" style="display:none">
     <h5>How much time per week?</h5>
     <div class="d-flex flex-column gap-2 mt-3">
       <div class="opt" data-v="2-5" onclick="pickTime(this)">2–5 hrs — Light gigs</div>
@@ -66,8 +75,18 @@
     <button class="btn-gold px-3 py-1" id="qnext" disabled onclick="next()">Continue →</button>
   </div>
 </div>
-    </div>
+
+
+  <!-- RESULTS -->
+<div id="results" class="page container py-4">
+  <h5>Your Matches <span class="text-muted fw-normal small" id="rmeta"></span></h5>
+  <p class="text-muted small mb-3">Based on your skills, in Ranchi.</p>
+  <div id="rlist"></div>
+  <div class="d-flex gap-2 mt-3">
+    <button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="startQuiz()">↺ Retake</button>
+    <button class="btn-gold px-3 py-1" onclick="show('post')">Post a Gig</button>
   </div>
+</div>
 <script src="app.js"> </script>
  
     
