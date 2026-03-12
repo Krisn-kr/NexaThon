@@ -196,4 +196,5 @@ window.onload = () => {
   loadHome();
   chips("skill-chips", skills);
   chips("int-chips", interests);
+  chips("pchips",[]);
 };
