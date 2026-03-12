@@ -12,24 +12,19 @@ const GIGS = [
 ];
 
 let step = 1, skills = [], time = "", interests = [];
-// =========================
-//           allGIgs
-// =========================
+
 function allGigs() {
-    let hidden = JSON.parse(localStorage.getItem("gm_hidden") || "[]");
-    let extra = JSON.parse(localStorage.getItem("gm_gigs") || "[]");
-    return GIGS.concat(extra).filter(g => !hidden.includes(g.id));
+  let hidden = JSON.parse(localStorage.getItem("gm_hidden") || "[]");
+  let extra  = JSON.parse(localStorage.getItem("gm_gigs")   || "[]");
+  return GIGS.concat(extra).filter(g => !hidden.includes(g.id));
 }
 
-// ======== remove gigs===========
 function removeGig(id) {
-    let hidden = JSON.parse(localStorage.getItem("gm_hidden") || "[]");
-    hidden.push(id);
-    localStorage.setItem("gm_hidden", JSON.stringify(hidden));
-    loadHome();
+  let hidden = JSON.parse(localStorage.getItem("gm_hidden") || "[]");
+  hidden.push(id);
+  localStorage.setItem("gm_hidden", JSON.stringify(hidden));
+  loadHome();
 }
-
-// == show -=
 
 function show(id) {
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
@@ -38,27 +33,132 @@ function show(id) {
   gsap.from("#" + id, { opacity: 0, y: 12, duration: 0.3 });
 }
 
+// Home - load gig previews
+function loadHome() {
+  document.getElementById("home-gigs").innerHTML = allGigs().slice(0, 3).map(g =>
+    `<div class="gig-card">
+      <div><div style="font-weight:600">${g.title}</div><div class="gig-by">by ${g.by}</div></div>
+      <div class="d-flex align-items-center gap-2">
+        <div class="gig-pay">${g.pay}</div>
+        <button class="done-btn" onclick="removeGig(${g.id})" title="Mark as done">✓ Done</button>
+      </div>
+    </div>`
+  ).join("");
+}
 
 // Quiz
 function startQuiz() {
-  step = 1;
-skills.length = 0; 
-time = ""; interests.length = 0;
-document.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
-  
-["q1","q2","q3"].forEach((id, i) => document.getElementById(id).style.display = i === 0 ? "" : "none");
+  step = 1; skills.length = 0; time = ""; interests.length = 0;
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
+  document.querySelectorAll(".opt").forEach(c => c.classList.remove("on"));
+  ["q1","q2","q3"].forEach((id, i) => document.getElementById(id).style.display = i === 0 ? "" : "none");
   refreshQuiz();
   show("quiz");
 }
 
-// Home - load gig previews
-function startQuiz() {
-    step = 1; skills.length = 0; time = ""; interests.length = 0;
-    document.querySelectorAll(".chip").forEach(c => c.classList.remove("on"));
-    document.querySelectorAll(".opt").forEach(c => c.classList.remove("on"));
-    ["q1", "q2", "q3"].forEach((id, i) => document.getElementById(id).style.display = i === 0 ? "" : "none");
+function refreshQuiz() {
+  document.getElementById("qbar").style.width = (step / 3 * 100) + "%";
+  document.getElementById("qlabel").textContent = "Step " + step + " of 3";
+  document.getElementById("qback").style.visibility = step > 1 ? "visible" : "hidden";
+  document.getElementById("qnext").textContent = step === 3 ? "See Matches ✦" : "Continue →";
+  let ok = (step===1 && skills.length) || (step===2 && time) || (step===3 && interests.length);
+  document.getElementById("qnext").disabled = !ok;
+}
+
+function chips(groupId, arr) {
+  document.querySelectorAll("#" + groupId + " .chip").forEach(c => {
+    c.onclick = () => {
+      c.classList.toggle("on");
+      let v = c.dataset.v;
+      c.classList.contains("on") ? arr.push(v) : arr.splice(arr.indexOf(v), 1);
+      refreshQuiz();
+    };
+  });
+}
+
+function pickTime(el) {
+  document.querySelectorAll(".opt").forEach(o => o.classList.remove("on"));
+  el.classList.add("on");
+  time = el.dataset.v;
+  refreshQuiz();
+}
+
+function next() {
+  if (step < 3) {
+    document.getElementById("q" + step).style.display = "none";
+    step++;
+    document.getElementById("q" + step).style.display = "";
     refreshQuiz();
-    show("quiz");
+  } else showMatches();
+}
+
+function back() {
+  document.getElementById("q" + step).style.display = "none";
+  step--;
+  document.getElementById("q" + step).style.display = "";
+  refreshQuiz();
+}
+
+// Results
+function score(g) {
+  let s = Math.min(g.skills.filter(x => skills.includes(x)).length * 3, 6);
+  if (interests.includes(g.cat)) s += 2;
+  if (time === "10+") s += 1;
+  return Math.min(s, 10);
+}
+
+function showMatches() {
+  let sorted = allGigs().map(g => ({...g, s: score(g)})).sort((a,b) => b.s - a.s).slice(0, 5);
+  document.getElementById("rmeta").textContent = "(top " + sorted.length + ")";
+
+  // Earning estimate
+  let earn = { "2-5": "₹500 – 1,200", "5-10": "₹1,200 – 3,000", "10+": "₹3,000 – 6,000" };
+  document.getElementById("earn-banner").innerHTML =
+    `💰 Based on your availability, you could earn <strong>${earn[time]}/month</strong> from gigs in Ranchi.`;
+  document.getElementById("earn-banner").style.display = "";
+
+  document.getElementById("rlist").innerHTML = sorted.map(g => {
+    let cls = g.s >= 7 ? "rg" : g.s >= 4 ? "rp" : "rd";
+    let tags = g.skills.map(s => `<span class="badge bg-secondary me-1">${s}</span>`).join("");
+    let wa = encodeURIComponent(`Hi! Saw "${g.title}" on GigMatch. I'm a student from Ranchi!`);
+
+    // Why matched
+    let reasons = [];
+    g.skills.forEach(s => { if (skills.includes(s)) reasons.push("✓ " + s); });
+    if (interests.includes(g.cat)) reasons.push("✓ " + g.cat + " interest");
+    let whyHtml = reasons.length ? `<div class="why-matched mt-1 mb-2">${reasons.join(" &nbsp; ")}</div>` : "";
+
+    return `<div class="result-card">
+      <div class="ring ${cls}">${g.s}/10</div>
+      <div>
+        <div style="font-weight:700">${g.title}</div>
+        <div class="text-muted small mb-1">${g.desc}</div>
+        ${whyHtml}
+        ${tags}
+        <div class="d-flex justify-content-between align-items-center mt-2 flex-wrap gap-1">
+          <span class="rpay">${g.pay} <span class="text-muted fw-normal small">· ${g.by}</span></span>
+          <a href="https://wa.me/?text=${wa}" target="_blank" class="wa">💬 Apply</a>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+  show("results");
+  gsap.from(".result-card", { opacity: 0, y: 16, stagger: 0.08 });
+}
+
+// Share My Skills — student broadcasts their profile to college WhatsApp groups
+function shareSkills() {
+  let skillLine = skills.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(", ");
+  let intLine   = interests.map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(", ");
+  let timeMap   = { "2-5": "2–5 hrs/week", "5-10": "5–10 hrs/week", "10+": "10+ hrs/week" };
+  let msg = `🎯 Looking for gig work in Ranchi!
+
+💼 Skills: ${skillLine}
+👀 Interests: ${intLine}
+⏰ Available: ${timeMap[time]}
+
+DM me or reply here! Found via GigMatch 🚀`;
+  window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
 }
 
 
@@ -91,3 +191,9 @@ function submitGig() {
     show("home");
   }, 2000);
 }
+
+window.onload = () => {
+  loadHome();
+  chips("skill-chips", skills);
+  chips("int-chips", interests);
+};

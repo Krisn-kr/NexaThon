@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="li">
+<html lang="en" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -76,15 +76,16 @@
   </div>
 </div>
 
-
-  <!-- RESULTS -->
+<!-- RESULTS -->
 <div id="results" class="page container py-4">
   <h5>Your Matches <span class="text-muted fw-normal small" id="rmeta"></span></h5>
-  <p class="text-muted small mb-3">Based on your skills, in Ranchi.</p>
+  <p class="text-muted small mb-2">Based on your skills, in Ranchi.</p>
+  <div id="earn-banner" class="earn-banner mb-3" style="display:none"></div>
   <div id="rlist"></div>
-  <div class="d-flex gap-2 mt-3">
+  <div class="d-flex gap-2 mt-3 flex-wrap">
     <button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="startQuiz()">↺ Retake</button>
     <button class="btn-gold px-3 py-1" onclick="show('post')">Post a Gig</button>
+    <button class="wa-share" onclick="shareSkills()">📢 Share My Skills on WhatsApp</button>
   </div>
 </div>
 
@@ -93,17 +94,10 @@
   <h5>Post a Gig ✦</h5>
   <p class="text-muted small mb-3">Reach students across Ranchi.</p>
   <div id="pform">
-    <div class="mb-2">
-        <input id="pt" class="gm-input" type="text" placeholder="Gig Title *">
-    </div>
-    <div class="mb-2">
-        <textarea id="pd" class="gm-input" rows="3" placeholder="Description *">
-
-        </textarea>
-    </div>
+    <div class="mb-2"><input id="pt" class="gm-input" type="text" placeholder="Gig Title *"></div>
+    <div class="mb-2"><textarea id="pd" class="gm-input" rows="3" placeholder="Description *"></textarea></div>
     <div class="row g-2 mb-2">
-      <div class="col"><input id="pp" class="gm-input" type="text" placeholder="Pay *">
-    </div>
+      <div class="col"><input id="pp" class="gm-input" type="text" placeholder="Pay *"></div>
       <div class="col">
         <select id="pc" class="gm-input">
           <option value="">Category *</option>
@@ -118,15 +112,10 @@
     <div class="mb-2">
       <small class="text-muted">Skills needed:</small>
       <div class="d-flex flex-wrap gap-1 mt-1" id="pchips">
-        <span class="chip" data-v="code">Code</span>
-        <span class="chip" data-v="write">Write</span>
-        <span class="chip" data-v="design">Design</span>
-        <span class="chip" data-v="teach">Teach</span>
-        <span class="chip" data-v="social">Social</span>
-        
-        <span class="chip" data-v="video">Video</span>
-        <span class="chip" data-v="data">Data</span>
-        <span class="chip" data-v="math">Math</span>
+        <span class="chip" data-v="code">Code</span><span class="chip" data-v="write">Write</span>
+        <span class="chip" data-v="design">Design</span><span class="chip" data-v="teach">Teach</span>
+        <span class="chip" data-v="social">Social</span><span class="chip" data-v="video">Video</span>
+        <span class="chip" data-v="data">Data</span><span class="chip" data-v="math">Math</span>
       </div>
     </div>
     <div class="mb-3"><input id="pn" class="gm-input" type="text" placeholder="Your Name / Shop *"></div>
@@ -140,8 +129,8 @@
   </div>
   <button class="btn btn-sm btn-outline-secondary rounded-pill mt-3" onclick="show('home')">← Back</button>
 </div>
-<script src="app.js"> </script>
- 
-    
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
